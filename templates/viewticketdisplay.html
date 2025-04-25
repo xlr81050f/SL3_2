@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tickets List</title>
+    <style>
+        body {
+            background: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        .ticket-list {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 0, 0.3);
+        }
+        h1 {
+            color: #ffff8a;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+        th {
+            background-color: #333;
+            color: #ffff8a;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket-list">
+        <h1>Tickets List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Movie</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Tickets</th>
+                    <th>Booking Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in obj %}
+                <tr>
+                    <td>{{ ticket.id }}</td>
+                    <td>{{ ticket.movie }}</td>
+                    <td>{{ ticket.user }}</td>
+                    <td>{{ ticket.phone }}</td>
+                    <td>{{ ticket.nos }}</td>
+                    <td>{{ ticket.book_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/"><button class="btn">Back to Home</button></a>
+    </div>
+</body>
+</html>

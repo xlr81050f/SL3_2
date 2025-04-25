@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+    <style>
+        body {
+            background: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        .details {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 600px;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            text-align: left;
+        }
+        h1 {
+            color: #8aff8a;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="details">
+        <h1>User Details</h1>
+        <p><strong>Ticket ID:</strong> {{ obj.id }}</p>
+        <p><strong>Movie:</strong> {{ obj.movie }}</p>
+        <p><strong>Name:</strong> {{ obj.user }}</p>
+        <p><strong>Phone:</strong> {{ obj.phone }}</p>
+        <p><strong>Tickets:</strong> {{ obj.nos }}</p>
+        <p><strong>Booking Time:</strong> {{ obj.book_time }}</p>
+        <a href="/"><button class="btn">Back to Home</button></a

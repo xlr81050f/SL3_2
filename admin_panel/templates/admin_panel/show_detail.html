@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ show.title }} - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            {% if show.image %}
+                <img src="{{ show.image.url }}" class="card-img-top" alt="{{ show.title }}">
+            {% else %}
+                <div class="card-img-top bg-light text-center py-5">
+                    <span class="text-muted">No image available</span>
+                </div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ show.title }}</h5>
+                <span class="badge {% if show.category == 'INDIAN' %}bg-success{% elif show.category == 'HOLLYWOOD' %}bg-primary{% else %}bg-secondary{% endif %} mb-2">
+                    {{ show.get_category_display }}
+                </span>
+                <p class="card-text">{{ show.description }}</p>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item"><strong>Duration:</strong> {{ show.duration }} minutes</li>
+                    <li class="list-group-item"><strong>Release Date:</strong> {{ show.release_date }}</li>
+                    <li class="list-group-item">
+                        <strong>Status:</strong>
+                        <span class="badge {% if show.is_active %}bg-success{% else %}bg-danger{% endif %}">
+                            {% if show.is_active %}Active{% else %}Inactive{% endif %}
+                        </span>
+                    </li>
+                </ul>
+                <div class="d-grid gap-2">
+                    <a href="{% url 'admin_panel:show_update' show.id %}" class="btn btn-warning">Edit Show</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        Delete Show
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Showtimes</h5>
+                <a href="{% url 'admin_panel:showtime_create' show.id %}" class="btn btn-primary btn-sm">Add Showtime</a>
+            </div>
+            <div class="card-body">
+                {% if showtimes %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Price</th>
+                                    <th>Bookings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for showtime in showtimes %}
+                                    <tr>
+                                        <td>{{ showtime.id }}</td>
+                                        <td>{{ showtime.date }}</td>
+                                        <td>{{ showtime.time }}</td>
+                                        <td>${{ showtime.price }}</td>
+                                        <td>{{ showtime.bookings.count }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-center">No showtimes available for this show.</p>
+                    <div class="text-center">
+                        <a href="{% url 'admin_panel:showtime_create' show.id %}" class="btn btn-primary">Add Showtime</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <a href="{% url 'admin_panel:show_list' %}" class="btn btn-outline-secondary">Back to Shows</a>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete "{{ show.title }}"?</p>
+                <p class="text-danger">This action cannot be undone and will delete all associated showtimes and bookings.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form action="{% url 'admin_panel:show_delete' show.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

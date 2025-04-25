@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Tickets</title>
+    <style>
+        body {
+            background: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 0, 0.3);
+        }
+        h1 {
+            color: #ffff8a;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            background: #252525;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #ffff8a;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Tickets by Showtime</h1>
+        <form action="viewticketfn" method="GET">
+            <input type="text" name="ts" placeholder="Show Start Time (HH:MM)" required>
+            <button type="submit">View Tickets</button>
+        </form>
+    </div>
+</body>
+</html>

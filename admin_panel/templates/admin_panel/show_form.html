@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if show %}Edit Show{% else %}Add New Show{% endif %} - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">{% if show %}Edit Show: {{ show.title }}{% else %}Add New Show{% endif %}</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ show.title|default:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required>{{ show.description|default:'' }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="INDIAN" {% if show.category == 'INDIAN' %}selected{% endif %}>Indian</option>
+                            <option value="HOLLYWOOD" {% if show.category == 'HOLLYWOOD' %}selected{% endif %}>Hollywood</option>
+                            <option value="OTHER" {% if show.category == 'OTHER' %}selected{% endif %}>Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration (minutes)</label>
+                        <input type="number" class="form-control" id="duration" name="duration" value="{{ show.duration|default:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="release_date" class="form-label">Release Date</label>
+                        <input type="date" class="form-control" id="release_date" name="release_date" value="{{ show.release_date|date:'Y-m-d'|default:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Show Image</label>
+                        {% if show.image %}
+                            <div class="mb-2">
+                                <img src="{{ show.image.url }}" alt="{{ show.title }}" class="img-thumbnail" style="max-height: 200px;">
+                            </div>
+                        {% endif %}
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                        <div class="form-text">{% if show %}Leave empty to keep the current image.{% endif %}</div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="is_active" name="is_active" {% if show.is_active|default:True %}checked{% endif %}>
+                        <label class="form-check-label" for="is_active">Active</label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">{% if show %}Update Show{% else %}Create Show{% endif %}</button>
+                        <a href="{% url 'admin_panel:show_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

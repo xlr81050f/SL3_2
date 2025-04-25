@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Booking</title>
+    
+</head>
+<style>
+    body {
+        background: #121212; /* Dark background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        color: #e0e0e0; /* Light gray text */
+    }
+
+    #movies {
+        background: rgba(30, 30, 30, 0.8); /* Dark gray cards */
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 215, 0, 0.2); /* Gold border */
+        transition: all 0.3s ease;
+    }
+
+    #movies:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(255, 215, 0, 0.1); /* Gold shadow */
+    }
+
+    #name h1 {
+        color: #FFD700; /* Gold color */
+        margin-top: 0;
+        font-size: 2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    #ts, #te, #sa {
+        color: #b0b0b0; /* Light gray */
+        font-size: 1.1rem;
+        margin: 8px 0;
+    }
+
+    form {
+        margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    input[type="text"] {
+        padding: 10px 15px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        background: #252525; /* Dark input background */
+        color: #e0e0e0;
+        font-size: 1rem;
+        min-width: 200px;
+        transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        outline: none;
+        border-color: #FFD700; /* Gold border on focus */
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    }
+
+    input[type="text"]::placeholder {
+        color: #777;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(to right, #3a3a3a, #2a2a2a); /* Dark gray gradient */
+        color: #FFD700; /* Gold text */
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+    }
+
+    button:hover {
+        background: linear-gradient(to right, #2a2a2a, #1a1a1a);
+        color: #ffea8a; /* Lighter gold on hover */
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(255, 215, 0, 0.2);
+    }
+
+    #cancel, #updatetime, #details, #viewticket {
+        margin: 15px 0;
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    #cancel button {
+        background: linear-gradient(to right, #3a1c1c, #2a0c0c);
+        color: #ff6b6b;
+    }
+
+    #updatetime button {
+        background: linear-gradient(to right, #1c1c3a, #0c0c2a);
+        color: #8a8aff;
+    }
+
+    #details button {
+        background: linear-gradient(to right, #1c3a1c, #0c2a0c);
+        color: #8aff8a;
+    }
+
+    #viewticket button {
+        background: linear-gradient(to right, #3a3a1c, #2a2a0c);
+        color: #ffff8a;
+    }
+
+    @media (max-width: 768px) {
+        form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        #cancel, #updatetime, #details, #viewticket {
+            display: block;
+            margin: 15px 0;
+        }
+    }
+</style>
+<body bgcolor=skyblue>
+    <!-- Sample Movie 1 -->
+    <div id="movies">
+        <div id="name"><h1>Name : Dune: Part Two</h1></div>
+        <div id="ts">Time Start : 10:00 AM</div>
+        <div id="te">Time End : 1:15 PM</div>
+        <div id="sa">Seats available : 45</div>
+        <form action="bookt" method='GET'>
+            <input type="hidden" name="movie" value="Dune: Part Two" />
+            <input type="hidden" name="booking" value="45" />
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="phone"placeholder="Phone number">
+            <input type="text" name="nos" placeholder="number of tickets">
+            <button type="submit">Book</button>
+        </form>
+    </div>
+    
+    <!-- Sample Movie 2 -->
+    <div id="movies">
+        <div id="name"><h1>Name : Oppenheimer</h1></div>
+        <div id="ts">Time Start : 2:00 PM</div>
+        <div id="te">Time End : 5:30 PM</div>
+        <div id="sa">Seats available : 32</div>
+        <form action="bookt" method='GET'>
+            <input type="hidden" name="movie" value="Oppenheimer" />
+            <input type="hidden" name="booking" value="32" />
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="phone"placeholder="Phone number">
+            <input type="text" name="nos" placeholder="number of tickets">
+            <button type="submit">Book</button>
+        </form>
+    </div>
+    
+    <!-- Sample Movie 3 -->
+    <div id="movies">
+        <div id="name"><h1>Name : The Batman</h1></div>
+        <div id="ts">Time Start : 6:00 PM</div>
+        <div id="te">Time End : 8:45 PM</div>
+        <div id="sa">Seats available : 28</div>
+        <form action="bookt" method='GET'>
+            <input type="hidden" name="movie" value="The Batman" />
+            <input type="hidden" name="booking" value="28" />
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="phone"placeholder="Phone number">
+            <input type="text" name="nos" placeholder="number of tickets">
+            <button type="submit">Book</button>
+        </form>
+    </div>
+    
+    <!-- Sample Movie 4 -->
+    <div id="movies">
+        <div id="name"><h1>Name : Spider-Man: No Way Home</h1></div>
+        <div id="ts">Time Start : 9:00 PM</div>
+        <div id="te">Time End : 11:30 PM</div>
+        <div id="sa">Seats available : 15</div>
+        <form action="bookt" method='GET'>
+            <input type="hidden" name="movie" value="Spider-Man: No Way Home" />
+            <input type="hidden" name="booking" value="15" />
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="phone"placeholder="Phone number">
+            <input type="text" name="nos" placeholder="number of tickets">
+            <button type="submit">Book</button>
+        </form>
+    </div>
+    
+    <!-- Sample Movie 5 -->
+    <div id="movies">
+        <div id="name"><h1>Name : Top Gun: Maverick</h1></div>
+        <div id="ts">Time Start : 11:45 PM</div>
+        <div id="te">Time End : 2:15 AM</div>
+        <div id="sa">Seats available : 38</div>
+        <form action="bookt" method='GET'>
+            <input type="hidden" name="movie" value="Top Gun: Maverick" />
+            <input type="hidden" name="booking" value="38" />
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="phone"placeholder="Phone number">
+            <input type="text" name="nos" placeholder="number of tickets">
+            <button type="submit">Book</button>
+        </form>
+    </div>
+
+    <div id="cancel">
+        <a href="{% url 'delete' %}"><button type="button">
+            Cancel Tickets
+        </button></a>
+    </div>
+    <div id="updatetime">
+        <a href="{% url 'updatetime' %}"><button type="button">
+            Update Ticket Timings
+        </button></a>
+    </div>
+    <div id="details">
+        <a href="{% url 'details' %}"><button type="button">
+            View User Details
+        </button></a>
+    </div>
+    <div id="viewticket">
+        <a href="{% url 'viewticket' %}"><button type="button">
+            View Tickets
+        </button></a>
+    </div>
+</body>
+</html>

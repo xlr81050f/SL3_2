@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Shows - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Manage Shows</h1>
+    <a href="{% url 'admin_panel:show_create' %}" class="btn btn-primary">Add New Show</a>
+</div>
+
+{% if shows %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Duration</th>
+                    <th>Release Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for show in shows %}
+                    <tr>
+                        <td>{{ show.id }}</td>
+                        <td>
+                            {% if show.image %}
+                                <img src="{{ show.image.url }}" alt="{{ show.title }}" width="50">
+                            {% else %}
+                                <span class="text-muted">No image</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ show.title }}</td>
+                        <td>{{ show.get_category_display }}</td>
+                        <td>{{ show.duration }} min</td>
+                        <td>{{ show.release_date }}</td>
+                        <td>
+                            <span class="badge {% if show.is_active %}bg-success{% else %}bg-danger{% endif %}">
+                                {% if show.is_active %}Active{% else %}Inactive{% endif %}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="{% url 'admin_panel:show_detail' show.id %}" class="btn btn-sm btn-info">View</a>
+                                <a href="{% url 'admin_panel:show_update' show.id %}" class="btn btn-sm btn-warning">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ show.id }}">
+                                    Delete
+                                </button>
+                            </div>
+                            
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteModal{{ show.id }}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Confirm Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete "{{ show.title }}"?</p>
+                                            <p class="text-danger">This action cannot be undone.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <form action="{% url 'admin_panel:show_delete' show.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        <p>No shows available. Click the "Add New Show" button to create one.</p>
+    </div>
+{% endif %}
+{% endblock %}
