@@ -6,6 +6,7 @@ Django based web app which implements ticket booking for multiple movies, update
 ![Screenshot 2025-04-25 171425](https://github.com/user-attachments/assets/2de9f3e0-3d05-4e25-8189-75b7cc731337)
 ![Screenshot 2025-04-25 171434](https://github.com/user-attachments/assets/53d63d71-2853-4599-8dad-bbbcf790b9a1)
 ![Screenshot 2025-04-25 171401](https://github.com/user-attachments/assets/ae42d8d1-35e1-4c09-ba96-5005690758dc)
+![435487874-5cf0214f-7f8e-492c-9e65-6c9f96486d89](https://github.com/user-attachments/assets/c04f37ed-9e3c-4afb-916b-4408c2aace9e)
 
 
 
