@@ -13,10 +13,6 @@ Django based web app which implements ticket booking for multiple movies, update
 To install following dependencies Use:
 sudo pip install -r requirements.txt
 
-Usage:
-Clone the repo
-git clone https://github.com/kumaranubhav1654/Django-MOVIE-Ticket-booking
-
 Install Pre-Requisites:
 sudo pip install -r requirements.txt
 
